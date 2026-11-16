@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071426">
+<title>INGENIOMATH AI | Matemáticas e Ingeniería</title>
+<script src="https://cdn.jsdelivr.net/npm/mathjs@13.2.0/lib/browser/math.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#071426;--panel:#0d2037;--panel2:#132b46;--line:#24415d;--cyan:#35d9f4;--blue:#588cff;--white:#edf6ff;--muted:#9bb0c8;--green:#52e0a1;--yellow:#ffd166;--red:#ff7777}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#12395b 0,transparent 35%),var(--bg);color:var(--white);font:14px/1.55 Inter,system-ui,Arial}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{display:flex;min-height:100vh}.side{width:265px;flex-shrink:0;background:#08182a;border-right:1px solid var(--line);padding:20px 15px;display:flex;flex-direction:column;gap:5px}.brand{display:flex;align-items:center;gap:11px;padding:5px 8px 22px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--cyan),var(--blue));display:grid;place-items:center;color:#03182a;font-size:25px;font-weight:900}.brand b{letter-spacing:1px}.brand small{display:block;color:var(--cyan);font-size:9px;letter-spacing:2px}.navlabel{color:#6885a4;font-size:10px;letter-spacing:2px;padding:14px 10px 5px}.nav{background:none;border:0;color:var(--muted);padding:11px 12px;text-align:left;border-radius:10px;width:100%}.nav:hover,.nav.active{background:#153451;color:var(--cyan)}.sidefoot{margin-top:auto;border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--muted);font-size:11px}.sidefoot strong{color:var(--green)}.main{min-width:0;flex:1;display:flex;flex-direction:column}.top{height:68px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 25px;gap:12px}.top b{font-size:14px}.top small{display:block;color:var(--muted);font-size:11px}.tag{border:1px solid var(--line);padding:7px 10px;border-radius:30px;color:var(--cyan);font-size:10px}.hamb{display:none}.wrap{width:min(1160px,100%);margin:auto;padding:25px;flex:1}.page{display:none}.page.active{display:block}.hero{padding:8px 0 18px}.eyebrow{color:var(--cyan);font-size:10px;letter-spacing:3px;font-weight:800}.hero h1{font-size:clamp(28px,4vw,43px);line-height:1.1;margin:10px 0;background:linear-gradient(90deg,#fff,#5adcf5);background-clip:text;color:transparent}.hero p{max-width:760px;color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.tile,.panel{background:linear-gradient(145deg,#102943,#0b1c31);border:1px solid var(--line);border-radius:15px;padding:17px}.tile{transition:.2s}.tile:hover{border-color:var(--cyan);transform:translateY(-2px)}.tile .ico{font-size:24px}.tile h3{font-size:14px;margin:9px 0 4px}.tile p,.muted{color:var(--muted);font-size:12px}.tile button,.linkbtn{border:0;background:none;color:var(--cyan);padding:8px 0 0}.panel{margin:14px 0}.panel h2{font-size:16px;margin:0 0 12px}.panel h3{font-size:14px;margin:16px 0 7px;color:#c7efff}.chat{padding:0;overflow:hidden}.chathead{padding:14px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}.chathead small{color:var(--green)}.messages{height:390px;overflow:auto;padding:17px;display:flex;flex-direction:column;gap:13px}.msg{display:flex;gap:9px;max-width:94%}.msg.user{align-self:flex-end;flex-direction:row-reverse}.avatar{width:31px;height:31px;flex-shrink:0;border-radius:10px;background:#173b58;color:var(--cyan);display:grid;place-items:center;font-weight:bold}.user .avatar{background:#28508b;color:white}.bubble{background:#132b45;border:1px solid var(--line);padding:12px 14px;border-radius:5px 13px 13px 13px;white-space:pre-wrap;overflow-wrap:anywhere}.user .bubble{background:#19416c;border-radius:13px 5px 13px 13px}.bubble strong{color:var(--cyan)}.chatinput{border-top:1px solid var(--line);padding:13px}.row{display:flex;gap:9px;align-items:center}.row>*{min-width:0}.row input,.field,textarea,select{width:100%;background:#07182b;color:var(--white);border:1px solid var(--line);border-radius:10px;padding:12px;outline:none}.row input:focus,.field:focus,textarea:focus{border-color:var(--cyan)}.primary{border:0;border-radius:10px;padding:11px 15px;background:linear-gradient(110deg,var(--cyan),#6194ff);color:#04182a;font-weight:800}.chips{display:flex;gap:7px;overflow:auto;margin-bottom:10px}.chips button{white-space:nowrap;border:1px solid var(--line);background:#122b45;color:#b9d3ec;border-radius:30px;padding:7px 10px;font-size:11px}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.result{background:#061629;border:1px solid #1b3a55;border-radius:10px;padding:13px;margin-top:10px;white-space:pre-wrap;overflow-wrap:anywhere;color:#bcefff;min-height:42px;font-size:12px}.formula{font-family:Georgia,serif;color:#8ceaff;background:#07182a;padding:10px;border-radius:8px;display:block;margin:7px 0}.list{padding-left:19px;color:#c2d3e4}.list li{margin:6px 0}.table{width:100%;border-collapse:collapse;font-size:12px}.table td,.table th{padding:9px;border-bottom:1px solid var(--line);text-align:left}.table th{color:var(--cyan)}.canvasbox{height:300px}.canvasbox canvas{width:100%;height:100%}.option{display:block;width:100%;text-align:left;padding:10px;margin:7px 0;border-radius:9px;border:1px solid var(--line);background:#102943;color:var(--white)}.option:hover{border-color:var(--cyan)}.footer{text-align:center;color:#617c98;padding:18px;font-size:10px}
+@media(max-width:900px){.side{width:225px}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.side{position:fixed;z-index:9;top:0;bottom:0;left:-280px;width:265px;transition:.2s}.side.open{left:0}.hamb{display:block;background:none;border:0;color:var(--cyan);font-size:20px}.top{padding:0 13px}.wrap{padding:16px 12px}.grid{gap:8px}.tile{padding:12px}.two,.three{grid-template-columns:1fr}.messages{height:390px;padding:12px}.msg{max-width:98%}.tag{font-size:9px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side" id="side">
+ <div class="brand"><div class="logo">∑</div><div><b>INGENIOMATH AI</b><small>ENGINEERING LEARNING LAB</small></div></div>
+ <div class="navlabel">PLATAFORMA</div>
+ <button class="nav active" data-page="home">⌂ &nbsp; Inicio y tutor IA</button>
+ <button class="nav" data-page="calculator">∑ &nbsp; Calculadora científica</button>
+ <button class="nav" data-page="graph">⌁ &nbsp; Graficador de funciones</button>
+ <button class="nav" data-page="matrix">▦ &nbsp; Álgebra lineal</button>
+ <button class="nav" data-page="quiz">✓ &nbsp; Evaluaciones</button>
+ <div class="navlabel">BIBLIOTECA UNIVERSITARIA</div>
+ <button class="nav" data-topic="calculo diferencial">∫ &nbsp; Cálculo diferencial</button>
+ <button class="nav" data-topic="calculo integral">∮ &nbsp; Cálculo integral</button>
+ <button class="nav" data-topic="algebra lineal">▤ &nbsp; Álgebra lineal</button>
+ <button class="nav" data-topic="ecuaciones diferenciales">∂ &nbsp; Ecuaciones diferenciales</button>
+ <button class="nav" data-topic="probabilidad y estadistica">◉ &nbsp; Probabilidad y estadística</button>
+ <button class="nav" data-topic="fisica para ingenieria">⚙ &nbsp; Física para ingeniería</button>
+ <button class="nav" data-topic="ingenieria civil">⌂ &nbsp; Ingeniería civil</button>
+ <button class="nav" data-topic="ingenieria electrica">ϟ &nbsp; Ingeniería eléctrica</button>
+ <button class="nav" data-topic="ingenieria industrial">▥ &nbsp; Ingeniería industrial</button>
+ <button class="nav" data-topic="ingenieria de sistemas">⌘ &nbsp; Ingeniería de sistemas</button>
+ <div class="sidefoot"><strong>● MOTOR LOCAL ACTIVO</strong><br>Herramientas matemáticas en el navegador.<br><br>La IA generativa requiere conexión segura a un servicio externo.</div>
+</aside>
+<main class="main">
+<header class="top"><div class="row"><button class="hamb" id="hamb">☰</button><div><b>Centro de inteligencia matemática</b><small>Matemáticas aplicadas a la ingeniería · Nivel universitario</small></div></div><span class="tag">VERSIÓN ACADÉMICA 2.0</span></header>
+<div class="wrap">
+<section class="page active" id="home">
+ <div class="hero"><div class="eyebrow">APRENDE · CALCULA · MODELA · INNOVA</div><h1>INGENIOMATH AI</h1><p>Un laboratorio académico digital para comprender los fundamentos matemáticos, resolver problemas, explorar modelos y conectar la teoría con aplicaciones reales de ingeniería.</p></div>
+ <div class="grid">
+  <article class="tile"><div class="ico">∫</div><h3>Cálculo avanzado</h3><p>Límites, continuidad, derivadas, integrales y series.</p><button data-ask="Explícame cálculo diferencial desde los fundamentos hasta sus aplicaciones en ingeniería">Abrir módulo →</button></article>
+  <article class="tile"><div class="ico">▦</div><h3>Álgebra lineal</h3><p>Vectores, matrices, determinantes y sistemas lineales.</p><button data-ask="Enséñame álgebra lineal con ejemplos universitarios">Abrir módulo →</button></article>
+  <article class="tile"><div class="ico">📈</div><h3>Modelación matemática</h3><p>Funciones, gráficas, variables y análisis de resultados.</p><button data-page="graph">Abrir módulo →</button></article>
+  <article class="tile"><div class="ico">⚙</div><h3>Ingeniería aplicada</h3><p>Casos de estructuras, circuitos, producción y software.</p><button data-ask="Muéstrame aplicaciones matemáticas en distintas ingenierías">Abrir módulo →</button></article>
+ </div>
+ <div class="panel chat">
+  <div class="chathead"><b>🤖 Tutor INGENIOMATH</b><small>● Disponible · base académica local</small></div>
+  <div class="messages" id="messages"><div class="msg"><div class="avatar">∑</div><div class="bubble">¡Bienvenido a <strong>INGENIOMATH AI</strong>!
+
+Soy tu tutor académico de matemáticas aplicadas a la ingeniería. Puedes preguntarme por cálculo, álgebra, física, estadística y modelación matemática.
+
+También puedes usar las herramientas de la plataforma para calcular, graficar y resolver sistemas de ecuaciones.</div></div></div>
+  <div class="chatinput">
+   <div class="chips"><button data-ask="Explícame las derivadas y sus aplicaciones">Derivadas</button><button data-ask="¿Qué es una integral definida?">Integrales</button><button data-ask="Explícame matrices y determinantes">Matrices</button><button data-ask="Aplicaciones de matemáticas en ingeniería civil">Ingeniería civil</button></div>
+   <div class="row"><input id="question" placeholder="Escribe tu pregunta matemática..."><button class="primary" id="send">Enviar</button></div>
+  </div>
+ </div>
+ <div class="panel"><h2>¿Qué encontrarás en esta plataforma?</h2><div class="three"><div><b>01 · Fundamentos</b><p class="muted">Conceptos, propiedades, fórmulas y razonamiento matemático.</p></div><div><b>02 · Herramientas</b><p class="muted">Cálculo numérico, gráficas y solución de sistemas lineales.</p></div><div><b>03 · Aplicaciones</b><p class="muted">Ejemplos conectados con problemas de distintas ingenierías.</p></div></div></div>
+</section>
+<section class="page" id="calculator">
+ <div class="hero"><div class="eyebrow">HERRAMIENTA MATEMÁTICA</div><h1>Calculadora científica</h1><p>Evalúa expresiones numéricas, funciones trigonométricas, potencias, raíces y logaritmos usando Math.js.</p></div>
+ <div class="panel"><h2>Expresión matemática</h2><input class="field" id="calc" value="(sqrt(25)+sin(pi/2))*4^2"><p class="muted">Ejemplos: sqrt(25), sin(pi/2), log(100), 3^4, (5+2)/3</p><button class="primary" id="calcgo">CALCULAR</button><div class="result" id="calcresult">El resultado aparecerá aquí.</div></div>
+ <div class="panel"><h2>Funciones disponibles</h2><div class="two"><div><b>Trigonometría</b><p class="muted">sin(x), cos(x), tan(x), asin(x), acos(x), atan(x)</p></div><div><b>Potencias y raíces</b><p class="muted">x^n, sqrt(x), nthRoot(x,n), abs(x)</p></div><div><b>Logaritmos</b><p class="muted">log(x), log10(x), exp(x)</p></div><div><b>Constantes</b><p class="muted">pi, e</p></div></div></div>
+</section>
+<section class="page" id="graph">
+ <div class="hero"><div class="eyebrow">ANÁLISIS Y MODELACIÓN</div><h1>Graficador de funciones</h1><p>Representa funciones de una variable y analiza su comportamiento en un intervalo.</p></div>
+ <div class="panel"><h2>Definición de la función</h2><div class="two"><div><label>f(x)</label><input class="field" id="func" value="x^2-4*x+3"></div><div><label>Intervalo mínimo y máximo</label><div class="row"><input class="field" id="xmin" type="number" value="-5"><input class="field" id="xmax" type="number" value="5"></div></div></div><p class="muted">Usa x como variable. Ejemplos: x^2, sin(x), exp(-x), x^3-2*x.</p><button class="primary" id="plot">GRAFICAR FUNCIÓN</button><div class="canvasbox"><canvas id="chart"></canvas></div><div class="result" id="graphresult">La gráfica aparecerá aquí.</div></div>
+</section>
+<section class="page" id="matrix">
+ <div class="hero"><div class="eyebrow">ÁLGEBRA LINEAL COMPUTACIONAL</div><h1>Solucionador de sistemas 3×3</h1><p>Resuelve tres ecuaciones lineales con tres incógnitas mediante eliminación de Gauss y pivoteo parcial.</p></div>
+ <div class="panel"><h2>Ingresa los coeficientes de cada ecuación</h2><p class="muted">Forma: ax + by + cz = d. Cada fila contiene los coeficientes de x, y, z y el término independiente d.</p><div class="two" id="matrixinputs"></div><button class="primary" id="solve">RESOLVER SISTEMA</button><div class="result" id="matrixresult">La solución aparecerá aquí.</div></div>
+</section>
+<section class="page" id="quiz">
+ <div class="hero"><div class="eyebrow">EVALUACIÓN UNIVERSITARIA</div><h1>Comprueba tus conocimientos</h1><p>Responde siete preguntas sobre cálculo, álgebra, física y matemáticas aplicadas.</p></div>
+ <div class="panel"><div id="quizprogress" class="muted">Pregunta 1 de 7</div><h2 id="quizq"></h2><div id="quizopts"></div><div class="result" id="quizfeedback">Selecciona una respuesta.</div><button class="primary" id="nextq">SIGUIENTE</button></div>
+</section>
+<section class="page" id="library">
+ <div class="hero"><div class="eyebrow">CONTENIDO ACADÉMICO</div><h1 id="libtitle">Biblioteca universitaria</h1><p>Conceptos y aplicaciones fundamentales para el estudio de las matemáticas en ingeniería.</p></div>
+ <div id="libcontent"></div>
+</section>
+<div class="footer">INGENIOMATH AI · Plataforma educativa de matemáticas e ingeniería · Versión 2.0</div>
+</div>
+</main>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===id));$('side').classList.remove('open')}
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
+$('hamb').onclick=()=>$('side').classList.toggle('open');
+function addMsg(text,type='bot'){let m=document.createElement('div');m.className='msg '+(type==='user'?'user':'');let a=document.createElement('div');a.className='avatar';a.textContent=type==='user'?'TÚ':'∑';let b=document.createElement('div');b.className='bubble';b.textContent=text;m.append(a,b);$('messages').append(m);$('messages').scrollTop=$('messages').scrollHeight}
+const knowledge=[
+{keys:['calculo diferencial','derivada','derivadas'],title:'CÁLCULO DIFERENCIAL',text:`El cálculo diferencial estudia cómo cambian las funciones. Su herramienta central es la derivada, que representa la tasa de cambio instantánea y la pendiente de la recta tangente.
+
+DEFINICIÓN:
+f'(x) = lim(h→0) [f(x+h)-f(x)]/h
+
+REGLAS FUNDAMENTALES:
+• Constante: d(c)/dx = 0.
+• Potencia: d(xⁿ)/dx = n·xⁿ⁻¹.
+• Suma: (f+g)' = f'+g'.
+• Producto: (fg)' = f'g+fg'.
+• Cociente: (f/g)' = (f'g-fg')/g².
+• Cadena: [f(g(x))]' = f'(g(x))·g'(x).
+
+DERIVADAS COMUNES:
+• d(sen x)/dx = cos x.
+• d(cos x)/dx = -sen x.
+• d(eˣ)/dx = eˣ.
+• d(ln x)/dx = 1/x.
+
+APLICACIONES EN INGENIERÍA:
+1. Velocidad: derivada de la posición respecto al tiempo.
+2. Aceleración: derivada de la velocidad.
+3. Optimización: búsqueda de máximos y mínimos.
+4. Análisis de sensibilidad: variación de una salida frente a una entrada.
+
+EJEMPLO:
+Si f(x)=3x²+2x-5, entonces f'(x)=6x+2. En x=2, la pendiente instantánea es 14.`},
+{keys:['calculo integral','integral','integrales'],title:'CÁLCULO INTEGRAL',text:`El cálculo integral estudia acumulación, áreas, volúmenes y cantidades que varían continuamente. La integral definida representa una acumulación neta.
+
+INTEGRAL INDEFINIDA:
+∫f(x)dx = F(x)+C, donde F'(x)=f(x).
+
+REGLAS:
+• ∫xⁿ dx = xⁿ⁺¹/(n+1)+C, para n≠-1.
+• ∫1/x dx = ln|x|+C.
+• ∫eˣ dx = eˣ+C.
+• ∫cos x dx = sen x+C.
+• ∫sen x dx = -cos x+C.
+
+TEOREMA FUNDAMENTAL:
+∫[a,b] f(x)dx = F(b)-F(a).
+
+APLICACIONES:
+• Cálculo de áreas y volúmenes.
+• Trabajo realizado por una fuerza variable.
+• Caudal y volumen acumulado.
+• Centro de masa y momentos.
+• Energía y magnitudes distribuidas.
+
+EJEMPLO:
+∫[0,2] 3x² dx = [x³]₀² = 8 unidades cúbicas.`},
+{keys:['limite','limites','continuidad'],title:'LÍMITES Y CONTINUIDAD',text:`Un límite describe el valor al que se aproxima una función cuando la variable se acerca a un punto.
+
+NOTACIÓN:
+lim(x→a) f(x)=L.
+
+PROPIEDADES:
+• El límite de una suma es la suma de los límites.
+• El límite de un producto es el producto de los límites.
+• El límite de un cociente es el cociente de los límites si el denominador no tiende a cero.
+
+CONTINUIDAD:
+Una función es continua en a cuando:
+1. f(a) existe.
+2. lim(x→a)f(x) existe.
+3. lim(x→a)f(x)=f(a).
+
+TÉCNICAS:
+Factorización, racionalización, identidades trigonométricas, límites notables y regla de L'Hôpital cuando se cumplen sus condiciones.
+
+APLICACIONES:
+Análisis de estabilidad, comportamiento de señales, aproximaciones y modelos físicos.`},
+{keys:['algebra lineal','matriz','matrices','determinante','vector','vectores'],title:'ÁLGEBRA LINEAL',text:`El álgebra lineal estudia vectores, matrices, espacios vectoriales y transformaciones lineales. Es esencial en simulación, estructuras, datos y computación.
+
+CONCEPTOS:
+• Vector: elemento con magnitud y dirección.
+• Matriz: arreglo rectangular de números.
+• Determinante: escalar asociado a una matriz cuadrada.
+• Rango: número de filas o columnas linealmente independientes.
+• Autovalor y autovector: relación Av=λv.
+
+SISTEMAS LINEALES:
+Ax=b. Si A es invertible, la solución única es x=A⁻¹b.
+
+MÉTODOS:
+Eliminación de Gauss, Gauss-Jordan, factorización LU y métodos iterativos.
+
+APLICACIONES:
+• Análisis matricial de estructuras.
+• Circuitos eléctricos.
+• Gráficos 3D y robótica.
+• Aprendizaje automático.
+• Redes y optimización.
+
+EJEMPLO:
+2x+y=5; x-y=1. La solución es x=2, y=1.`},
+{keys:['ecuaciones diferenciales','ecuacion diferencial'],title:'ECUACIONES DIFERENCIALES',text:`Una ecuación diferencial relaciona una función desconocida con una o varias de sus derivadas. Modela fenómenos dinámicos.
+
+TIPOS:
+• Ordinarias (EDO): una variable independiente.
+• Parciales (EDP): varias variables independientes.
+• Orden: derivada de mayor orden presente.
+• Lineales o no lineales.
+
+EJEMPLO DE PRIMER ORDEN:
+dy/dt=ky.
+Separando variables: dy/y=k dt.
+Integrando: ln|y|=kt+C.
+Solución: y(t)=C·e^(kt).
+
+APLICACIONES:
+• Vibraciones mecánicas.
+• Transferencia de calor.
+• Circuitos eléctricos.
+• Crecimiento poblacional.
+• Dinámica de fluidos.
+• Control automático.
+
+Las condiciones iniciales permiten determinar constantes de integración.`},
+{keys:['probabilidad','estadistica','estadística'],title:'PROBABILIDAD Y ESTADÍSTICA',text:`La probabilidad cuantifica incertidumbre. La estadística analiza datos para describir fenómenos y tomar decisiones.
+
+CONCEPTOS:
+• P(A): probabilidad de un evento.
+• Media: promedio de los datos.
+• Mediana: valor central ordenado.
+• Varianza: dispersión cuadrática respecto a la media.
+• Desviación estándar: raíz de la varianza.
+• Correlación: medida de asociación lineal.
+
+FÓRMULAS:
+Media: x̄=Σxᵢ/n.
+Varianza poblacional: σ²=Σ(xᵢ-μ)²/N.
+Desviación estándar: σ=√σ².
+Probabilidad condicional: P(A|B)=P(A∩B)/P(B).
+
+APLICACIONES:
+Control de calidad, confiabilidad, análisis de riesgos, experimentación y pronósticos.`},
+{keys:['fisica','newton','fuerza','movimiento'],title:'FÍSICA PARA INGENIERÍA',text:`La física utiliza modelos matemáticos para describir fenómenos naturales.
+
+MECÁNICA:
+• Segunda ley de Newton: ΣF=ma.
+• Movimiento uniforme: x=x₀+vt.
+• Movimiento uniformemente acelerado: x=x₀+v₀t+½at².
+• Energía cinética: Ec=½mv².
+
+ELECTRICIDAD:
+• Ley de Ohm: V=IR.
+• Potencia eléctrica: P=VI.
+
+Comprueba siempre el sistema de unidades, el sentido de los vectores y las condiciones del modelo.`},
+{keys:['ingenieria civil','estructuras','viga','construccion'],title:'MATEMÁTICAS EN INGENIERÍA CIVIL',text:`Las matemáticas apoyan el análisis, diseño y construcción de infraestructura.
+
+APLICACIONES:
+• Geometría y topografía: distancias, pendientes y áreas.
+• Cálculo integral: volúmenes de excavación y movimiento de tierras.
+• Álgebra lineal: análisis matricial de estructuras.
+• Ecuaciones diferenciales: vibraciones y respuesta dinámica.
+• Estadística: variabilidad de materiales y control de calidad.
+
+EJEMPLO GEOMÉTRICO:
+Volumen de una columna prismática: V=A·h. Para sección rectangular A=b·d, por tanto V=b·d·h.
+
+IMPORTANTE: este ejemplo es geométrico y no sustituye el diseño estructural. El diseño real requiere cargas, materiales, normativa vigente, combinaciones y revisión profesional.`},
+{keys:['ingenieria electrica','circuito','electricidad'],title:'MATEMÁTICAS EN INGENIERÍA ELÉCTRICA',text:`El análisis eléctrico utiliza álgebra, trigonometría, números complejos y ecuaciones diferenciales.
+
+RELACIONES:
+Ley de Ohm: V=IR.
+Potencia: P=VI.
+En corriente alterna se usan fasores y números complejos.
+Impedancia: Z=R+jX.
+
+APLICACIONES: análisis de circuitos, señales sinusoidales, sistemas trifásicos, control, electrónica y redes de potencia.
+
+EJEMPLO: para R=10 Ω e I=2 A, V=IR=20 V. La potencia disipada es P=I²R=40 W.`},
+{keys:['ingenieria industrial','optimizacion','produccion'],title:'MATEMÁTICAS EN INGENIERÍA INDUSTRIAL',text:`La ingeniería industrial usa modelos para mejorar productividad, calidad y uso de recursos.
+
+ÁREAS:
+• Investigación de operaciones.
+• Programación lineal.
+• Optimización de procesos.
+• Estadística y control de calidad.
+• Teoría de colas e inventarios.
+
+EJEMPLO: una función de costo C(q) puede analizarse mediante C'(q). Los puntos críticos satisfacen C'(q)=0; después se estudia la segunda derivada y las restricciones para identificar mínimos factibles.
+
+Un modelo útil debe declarar variables, función objetivo, restricciones, unidades y supuestos.`},
+{keys:['ingenieria de sistemas','programacion','inteligencia artificial','algoritmo'],title:'MATEMÁTICAS EN INGENIERÍA DE SISTEMAS',text:`Las matemáticas sostienen el desarrollo de software, redes y sistemas inteligentes.
+
+APLICACIONES:
+• Lógica y matemática discreta para algoritmos.
+• Álgebra lineal para modelos de aprendizaje automático.
+• Probabilidad para inferencia y predicción.
+• Teoría de grafos para redes y rutas.
+• Criptografía para seguridad.
+• Optimización para eficiencia computacional.
+
+Un algoritmo debe analizarse por corrección, complejidad, recursos y casos límite.`},
+{keys:['trigonometr','seno','coseno','tangente'],title:'TRIGONOMETRÍA',text:`La trigonometría relaciona ángulos y longitudes.
+
+RAZONES EN TRIÁNGULO RECTÁNGULO:
+sen θ = opuesto/hipotenusa.
+cos θ = adyacente/hipotenusa.
+tan θ = opuesto/adyacente.
+
+IDENTIDAD FUNDAMENTAL: sen²θ+cos²θ=1.
+
+LEY DE SENOS: a/sen A=b/sen B=c/sen C.
+LEY DE COSENOS: c²=a²+b²-2ab cos C.
+
+APLICACIONES: descomposición de fuerzas, topografía, análisis de ondas, estructuras y circuitos de corriente alterna.`}
+];
+
+
+function normalize(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+
+function reply(q){
+let n=normalize(q);
+let hit=knowledge.find(k=>k.keys.some(key=>n.includes(normalize(key))));
+if(hit)return hit.title+'\n\n'+hit.text;
+
+if(window.math){
+let match=q.match(/(?:sqrt|sin|cos|tan|log|pi|e)?[\d\s+\-*/^().]+/i);
+if(match&&/[0-9]/.test(match[0]))try{
+let ex=match[0].trim();
+let r=math.evaluate(ex);
+if(typeof r==='number'&&Number.isFinite(r))
+return `CÁLCULO DE EXPRESIÓN
+
+Expresión: ${ex}
+Resultado: ${math.format(r,{precision:12})}
+
+Este resultado es una evaluación numérica. Si necesitas el procedimiento teórico, indica el tema y las condiciones del ejercicio.`
+}catch(e){}
+}
+
+return `Para ayudarte con precisión, organiza el problema así:
+
+1. Tema: cálculo, álgebra, estadística, física o ingeniería.
+2. Datos conocidos: valores y unidades.
+3. Incógnita: qué necesitas encontrar.
+4. Condiciones: restricciones o supuestos.
+
+Puedo explicar los módulos incluidos en la biblioteca académica y evaluar expresiones numéricas. Esta versión usa una base de conocimiento local; no es un modelo generativo conectado a internet y no debe inventar respuestas cuando falta información.`
+}
+
+function send(){
+let q=$('question').value.trim();
+if(!q)return;
+addMsg(q,'user');
+$('question').value='';
+setTimeout(()=>addMsg(reply(q)),180)
+}
+
+$('send').onclick=send;
+$('question').addEventListener('keydown',e=>{
+if(e.key==='Enter')send()
+});
+
+document.querySelectorAll('[data-ask]').forEach(b=>
+b.addEventListener('click',()=>{
+go('home');
+$('question').value=b.dataset.ask;
+send()
+})
+);
+
+document.querySelectorAll('[data-topic]').forEach(b=>
+b.addEventListener('click',()=>openTopic(b.dataset.topic))
+);
+
+function openTopic(topic){
+let k=knowledge.find(x=>x.keys.some(a=>
+normalize(topic).includes(normalize(a))||
+normalize(a).includes(normalize(topic))
+));
+if(!k)k=knowledge.find(x=>normalize(x.title).includes(normalize(topic)));
+$('libtitle').textContent=k?k.title:topic;
+$('libcontent').innerHTML='';
+let p=document.createElement('div');
+p.className='panel';
+let t=document.createElement('div');
+t.style.whiteSpace='pre-wrap';
+t.textContent=k?k.text:'Selecciona un tema de la biblioteca para ver su contenido.';
+p.append(t);
+$('libcontent').append(p);
+go('library')
+}
+
+$('calcgo').onclick=()=>{
+try{
+let v=math.evaluate($('calc').value);
+$('calcresult').textContent='Resultado: '+math.format(v,{precision:14})
+}catch(e){
+$('calcresult').textContent='Expresión no válida. Revisa paréntesis, operadores y nombres de funciones.'
+}
+};
+
+let chart;
+
+function plot(){
+if(!window.Chart||!$('chart'))return;
+let f=$('func').value;
+let min=Number($('xmin').value);
+let max=Number($('xmax').value);
+
+if(!(max>min)){
+$('graphresult').textContent='El máximo debe ser mayor que el mínimo.';
+return
+}
+
+try{
+let c=math.compile(f),labels=[],vals=[];
+
+for(let i=0;i<=300;i++){
+let x=min+(max-min)*i/300;
+labels.push(Number(x.toFixed(3)));
+let y;
+try{y=c.evaluate({x})}catch(e){y=NaN}
+vals.push(typeof y==='number'&&Number.isFinite(y)&&Math.abs(y)<1e8?y:null)
+}
+
+if(chart)chart.destroy();
+
+chart=new Chart($('chart'),{
+type:'line',
+data:{
+labels,
+datasets:[{
+label:'f(x) = '+f,
+data:vals,
+borderColor:'#35d9f4',
+borderWidth:2,
+pointRadius:0,
+tension:0,
+spanGaps:false
+}]
+},
+options:{
+responsive:true,
+maintainAspectRatio:false,
+plugins:{legend:{labels:{color:'#dcecff'}}},
+scales:{
+x:{ticks:{color:'#9bb0c8',maxTicksLimit:9},grid:{color:'#1c3852'}},
+y:{ticks:{color:'#9bb0c8'},grid:{color:'#1c3852'}}
+}
+}
+});
+
+$('graphresult').textContent='Función graficada: f(x)='+f+'. Intervalo ['+min+', '+max+']. La gráfica es una aproximación numérica.'
+
+}catch(e){
+$('graphresult').textContent='No se pudo interpretar la función. Usa x como variable y sintaxis compatible con math.js.'
+}
+}
+
+$('plot').onclick=plot;
+
+let mi=$('matrixinputs');
+
+for(let r=0;r<3;r++){
+let row=document.createElement('div');
+row.className='panel';
+row.style.padding='10px';
+row.innerHTML='<b style="color:var(--cyan)">Ecuación '+(r+1)+'</b>';
+
+for(let c=0;c<4;c++){
+let inp=document.createElement('input');
+inp.className='field';
+inp.type='number';
+inp.step='any';
+inp.id=`m${r}${c}`;
+inp.value=c===3?1:(r===c?1:0);
+inp.style.marginTop='6px';
+inp.placeholder=['x','y','z','b'][c];
+row.append(inp)
+}
+
+mi.append(row)
+}
+
+$('solve').onclick=()=>{
+let A=[];
+
+for(let r=0;r<3;r++){
+A[r]=[];
+for(let c=0;c<4;c++){
+let v=Number($(`m${r}${c}`).value);
+if(!Number.isFinite(v)){
+$('matrixresult').textContent='Completa todos los coeficientes.';
+return
+}
+A[r][c]=v
+}
+}
+
+let steps=[];
+
+for(let i=0;i<3;i++){
+let p=i;
+for(let r=i+1;r<3;r++)
+if(Math.abs(A[r][i])>Math.abs(A[p][i]))p=r;
+
+[A[i],A[p]]=[A[p],A[i]];
+
+if(Math.abs(A[i][i])<1e-10){
+$('matrixresult').textContent='La matriz es singular: no existe solución única. Comprueba si el sistema es incompatible o indeterminado.';
+return
+}
+
+let pivot=A[i][i];
+
+for(let c=i;c<4;c++)A[i][c]/=pivot;
+
+for(let r=0;r<3;r++)if(r!==i){
+let factor=A[r][i];
+for(let c=i;c<4;c++)A[r][c]-=factor*A[i][c]
+}
+
+steps.push('Pivote '+(i+1)+': normalización y eliminación de la columna '+(i+1)+'.')
+}
+
+$('matrixresult').textContent='SOLUCIÓN DEL SISTEMA\nx = '+A[0][3].toFixed(8)+'\ny = '+A[1][3].toFixed(8)+'\nz = '+A[2][3].toFixed(8)+'\n\nPROCEDIMIENTO\n'+steps.join('\n')+'\n\nMétodo: eliminación de Gauss con pivoteo parcial.'
+};
+
+const qs=[
+{q:'¿Cuál es la derivada de f(x)=x⁵?',o:['5x⁴','x⁴','5x','x⁶/6'],a:0,e:'Regla de potencia: d(xⁿ)/dx=n·xⁿ⁻¹.'},
+{q:'¿Cuál es una antiderivada de 4x³?',o:['12x²','x⁴+C','4x⁴+C','3x²+C'],a:1,e:'∫4x³ dx = x⁴+C.'},
+{q:'¿Qué representa físicamente la derivada de posición respecto al tiempo?',o:['Aceleración','Fuerza','Velocidad','Energía'],a:2,e:'La velocidad instantánea es dx/dt.'},
+{q:'Si V=IR, con R=8 Ω e I=3 A, ¿cuál es V?',o:['11 V','24 V','5 V','2.67 V'],a:1,e:'V=8×3=24 voltios.'},
+{q:'¿Qué condición garantiza solución única para Ax=b en una matriz cuadrada?',o:['det(A)=0','det(A)≠0','Todos los elementos positivos','La matriz es diagonal'],a:1,e:'Determinante distinto de cero equivale a matriz invertible.'},
+{q:'¿Cuál es la identidad trigonométrica fundamental?',o:['sen θ + cos θ=1','sen²θ+cos²θ=1','tan θ=1','sen θ·cos θ=1'],a:1,e:'La identidad pitagórica es sen²θ+cos²θ=1.'},
+{q:'¿Qué describe dy/dt=ky?',o:['Crecimiento o decaimiento exponencial','Movimiento circular siempre','Una recta constante','Una matriz'],a:0,e:'Su solución es y=Ce^(kt), según el signo de k.'}
+];
+
+let qi=0,score=0,done=false;
+
+function loadq(){
+let q=qs[qi];
+$('quizprogress').textContent=`Pregunta ${qi+1} de ${qs.length} · Aciertos: ${score}`;
+$('quizq').textContent=q.q;
+$('quizopts').innerHTML='';
+
+q.o.forEach((o,i)=>{
+let b=document.createElement('button');
+b.className='option';
+b.textContent=String.fromCharCode(65+i)+'. '+o;
+b.onclick=()=>answer(i);
+$('quizopts').append(b)
+});
+
+$('quizfeedback').textContent='Selecciona una respuesta.';
+done=false
+}
+
+function answer(i){
+if(done)return;
+done=true;
+let q=qs[qi];
+if(i===q.a)score++;
+$('quizfeedback').textContent=(i===q.a?'¡Correcto! ':'Respuesta correcta: '+q.o[q.a]+'. ')+q.e;
+$('quizprogress').textContent=`Pregunta ${qi+1} de ${qs.length} · Aciertos: ${score}`
+}
+
+$('nextq').onclick=()=>{
+if(!done){
+$('quizfeedback').textContent='Selecciona una respuesta antes de continuar.';
+return
+}
+
+qi++;
+
+if(qi>=qs.length){
+$('quizq').textContent='Evaluación finalizada';
+$('quizopts').innerHTML='';
+$('quizfeedback').textContent=`Resultado: ${score}/${qs.length} (${Math.round(score/qs.length*100)}%). ${score>=6?'Excelente dominio.':'Sigue practicando y repasa las explicaciones.'}`;
+$('nextq').textContent='REINICIAR';
+
+$('nextq').onclick=()=>{
+qi=0;
+score=0;
+$('nextq').textContent='SIGUIENTE';
+$('nextq').onclick=next;
+loadq()
+};
+return
+}
+
+loadq()
+};
+
+function next(){
+if(!done){
+$('quizfeedback').textContent='Selecciona una respuesta antes de continuar.';
+return
+}
+qi++;
+if(qi>=qs.length){
+$('quizq').textContent='Evaluación finalizada';
+$('quizopts').innerHTML='';
+$('quizfeedback').textContent=`Resultado: ${score}/${qs.length} (${Math.round(score/qs.length*100)}%).`;
+return
+}
+loadq()
+}
+
+loadq();
+</script>
+</body>
+</html>
+
+
+
